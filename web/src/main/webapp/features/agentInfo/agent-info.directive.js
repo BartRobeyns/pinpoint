@@ -75,10 +75,8 @@
 							}
 							oProgressBarService.setLoading(80);
 							showCharts(result);
-							$timeout(function () {
-								oProgressBarService.setLoading(100);
-								oProgressBarService.stopLoading();
-							}, 700);
+							oProgressBarService.setLoading(100);
+							oProgressBarService.stopLoading();
 							callback();
 						});
 					}
@@ -133,6 +131,7 @@
 							TooltipService.init( "permGen" );
 							TooltipService.init( "cpuUsage" );
 							TooltipService.init( "tps" );
+							TooltipService.init( "activeThread" );
 							bInitTooltip = true;
 	                	}
 	                }
@@ -286,6 +285,7 @@
 							scope.hasAgentData = false;
 							return;
 						}
+						scope.showEventInfo = false;
 						scope.hasAgentData = true;
 						scope.agent = agent;
 						scope.chartGroup = null;
@@ -308,7 +308,7 @@
 								loadAgentInfo( scope.selectTime );
 							}
 						}
-						$timeout(function () {
+						// $timeout(function () {
 							loadChartData(agent.agentId, aSelectionFromTo, period, function() {
 								initTime( scope.selectTime );
 								initTooltip();
@@ -316,8 +316,8 @@
 								setTimeSliderBaseColor();
 								getEventList( agent.agentId, aFromTo || calcuSliderTimeSeries( aSelectionFromTo ) );
 							});
-							scope.$apply();
-						});
+						// 	scope.$apply();
+						// });
 
 					});
 
